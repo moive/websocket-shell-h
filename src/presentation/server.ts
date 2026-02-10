@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import express, { Router } from "express";
 import path from "path";
 
@@ -52,7 +53,9 @@ export class Server {
     });
 
     this.serverListener = this.app.listen(this.port, () => {
-      console.log(`Server running on port ${this.port}`);
+      console.log(
+        `${chalk.cyan("Server running on port:")} ${chalk.bgBlue(" " + this.port + " ")}`,
+      );
     });
   }
 
