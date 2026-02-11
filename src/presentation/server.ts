@@ -20,9 +20,10 @@ export class Server {
     this.port = port;
     this.publicPath = public_path;
     this.routes = routes;
+    this.configure();
   }
 
-  async start() {
+  private configure() {
     //* Middlewares
     this.app.use(express.json()); // raw
     this.app.use(express.urlencoded({ extended: true })); // x-www-form-urlencoded
@@ -45,13 +46,15 @@ export class Server {
       if (!req.path.startsWith("/api")) {
         const indexPath = path.join(
           __dirname,
-          `../../../${this.publicPath}/index.html`,
+          `../../${this.publicPath}/index.html`,
         );
         return res.sendFile(indexPath);
       }
       next();
     });
+  }
 
+  async start() {
     this.serverListener = this.app.listen(this.port, () => {
       console.log(
         `${chalk.cyan("Server running on port:")} ${chalk.bgBlue(" " + this.port + " ")}`,
