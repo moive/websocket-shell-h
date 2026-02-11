@@ -3,7 +3,7 @@ import { envs } from "./config/envs";
 import { AppRoutes } from "./presentation/routes";
 import { Server } from "./presentation/server";
 import { WssService } from "./presentation/services";
-import chalk from "chalk";
+import { color } from "./presentation/console/colors";
 
 (async () => {
   main();
@@ -20,7 +20,7 @@ function main() {
 
   httpServer.listen(envs.PORT, () => {
     console.log(
-      `${chalk.cyan("Server running on port:")} ${chalk.bgBlue(" " + envs.PORT + " ")}`,
+      `${color.cyan("Server running on port:")} ${color.bgBlue(" " + envs.PORT + " ")}`,
     );
   });
 }
